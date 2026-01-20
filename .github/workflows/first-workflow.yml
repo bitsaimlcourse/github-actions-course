@@ -12,3 +12,19 @@ jobs:
         run: |
           node -v
           npm -v
+
+  parallel-job-macos:
+    runs-on: macos-latest
+    steps:
+      - name: View SW version
+        run: sw_vers
+  
+  dependency-job:
+    needs: run-shell-commands
+    runs-on: windows-latest
+    steps:
+      - name: echo a string
+        run: Write-Output "This job runs after 'run-shell-commands' job"
+      - name: errorstep
+        run: exit 1
+        continue-on-error: true
