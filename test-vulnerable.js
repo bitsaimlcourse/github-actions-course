@@ -1,5 +1,4 @@
 // Test file with intentional security vulnerabilities for CodePulse testing
-
 // SQL Injection vulnerability
 function getUser(userId) {
   const query = "SELECT * FROM users WHERE id = " + userId;
