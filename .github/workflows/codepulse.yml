@@ -1,0 +1,45 @@
+name: CodePulse Security Analysis
+
+on:
+  pull_request:
+    branches: [ main, develop ]
+  push:
+    branches: [ main ]
+
+jobs:
+  security-scan:
+    name: Static Security Analysis
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      security-events: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run CodePulse Analysis
+        uses: sudheer628/codepulse@main
+        with:
+          project-path: '.'
+          fail-on-severity: 'high'
+          report-format: 'sarif'
+          diff-only: 'true'
+
+      - name: Upload SARIF to GitHub Security
+        if: always()
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: codepulse-reports/report.sarif
+
+      - name: Upload Reports as Artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: codepulse-reports
+          path: codepulse-reports/
+          retention-days: 30
