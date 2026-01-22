@@ -22,8 +22,15 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Checkout CodePulse Action
+        uses: actions/checkout@v4
+        with:
+          repository: sudheer628/codepulse
+          token: ${{ secrets.CODEPULSE_ACCESS_TOKEN }}
+          path: .codepulse-action
+
       - name: Run CodePulse Analysis
-        uses: sudheer628/codepulse@main
+        uses: ./.codepulse-action
         with:
           project-path: '.'
           fail-on-severity: 'high'
