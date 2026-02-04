@@ -45,6 +45,7 @@ jobs:
           fail-on-severity: 'high'
           report-format: 'all'
           diff-only: 'true'
+          exclude-paths: '.codepulse-action'
 
       - name: Add Job Summary
         if: always()
