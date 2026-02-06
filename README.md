@@ -18,7 +18,14 @@
 - `RUNNER_OS` default environment variable contains the operating system of the runner executing the job. It provides information about the specific operating system environment in which the GitHub Actions workflow is running, allowing for conditional logic based on the OS.
 - a `GITHUB_TOKEN` expires either when a job finishes or after a maximum of 24 hours.
 - In GitHub Actions, you can use workflow commands to send instructions to the runner environment. These commands allow you to perform various tasks, including creating error annotations, setting environment variables, printing debug messages, and more. By using workflow commands, you can create error annotations without directly modifying the workflow code.
-
+- Treating environment variables as case-sensitive is the recommended practice in GitHub Actions to ensure consistency and avoid any potential issues related to case sensitivity. This approach helps maintain a standard naming convention for environment variables across different workflows and actions.
+- Creating a dedicated repository to store and manage all reusable workflows is recommended for optimal organization and maintainability.
+- primary purpose of using workflow commands as a run step in a GitHub Actions workflow? To communicate instructions and information to the runner environment
+- If a job marked as a dependency fails, the subsequent jobs are not executed, and the entire workflow is considered failed
+- The restore-keys parameter in the GitHub Actions cache action allows you to provide alternative keys to use in case the primary cache key results in a cache miss. This helps ensure that the workflow can still retrieve cached files even if the primary key does not match.
+- standard syntax for referencing secrets so you can use the GITHUB_TOKEN - ${{ secrets.GITHUB_TOKEN }}
+- When a GitHub repository contains multiple custom actions, where is the recommended location to store the action files? .github/actions with separate subdirectories for each action
+- debug messages are not displayed in the logs by default, you need to explicitly enable them by setting the ACTIONS_STEP_DEBUG secret to true in the repository's settings.
 ## Questions, Definitions, Key terms
 
 ### Workflow templates 
